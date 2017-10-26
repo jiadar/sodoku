@@ -22,7 +22,7 @@ public class TestGridSupplier
 		"..6.3.2.."		
 	};    
 	
-	
+ 	
 	private final static String[]       SOLUTION_1 =
     {
         "463217598",

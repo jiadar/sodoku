@@ -7,7 +7,6 @@ public class Grid
 {
 	private int[][]						values;
 	
-
 	//
 	// DON'T CHANGE THIS.
 	//
@@ -87,7 +86,7 @@ public class Grid
 	//                         .........
 	//
 	// Then the returned array list would contain:
-	//
+	// 
 	// 11.......          12.......          13.......          14.......    and so on     19.......
 	// .........          .........          .........          .........                  .........
 	// .........          .........          .........          .........                  .........
@@ -100,17 +99,43 @@ public class Grid
 	//
 	public ArrayList<Grid> next9Grids()
 	{		
-		int xOfNextEmptyCell;
-		int yOfNextEmptyCell;
+      int xOfNextEmptyCell = 0;
+		int yOfNextEmptyCell = 0;
 
 		// Find x,y of an empty cell.
 
+      for (int i = 0; i < values.length; i++) 
+		{
+			for (int j = 0; j < values[i].length; j++)
+			{
+				if (values[i][j] == 0)
+				{
+					xOfNextEmptyCell = i;
+					yOfNextEmptyCell = j;
+               break;
+				}
+			}
+		}
+      
 		// Construct array list to contain 9 new grids.
 		ArrayList<Grid> grids = new ArrayList<Grid>();
 
 		// Create 9 new grids as described in the comments above. Add them to grids.
+      for (int i = 0; i < 9; i++)
+		{
+         // copy this grid to a new grid
+         Grid grid = new Grid(this);
+         
+         // at empty x, y insert i
+         grid.values[xOfNextEmptyCell][yOfNextEmptyCell] = i;
+
+         // add to grids
+         
+			grids.add(grid);
+		}
 
 		return grids;
+	 
 	}
 	
 	
@@ -140,8 +165,30 @@ public class Grid
 	//
 	public boolean isFull()
 	{
-
+      boolean isFull = true;
+		int[] number = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+		for (int i = 0; i < values.length; i++)
+		{
+			for (int j = 0; j < values[i].length; j++)
+			{
+				//Checks if every cell has an empty digit
+				if (values[i][j] == 0)
+				{
+					isFull = false;
+				}
+				else
+				{
+					for (int num: number)
+					{
+                  isFull = true;
+					}
+				}
+				
+			}
+		}
+		return isFull;
 	}
+	
 	
 
 	//
@@ -152,6 +199,17 @@ public class Grid
 	//
 	public boolean equals(Object x)
 	{
-
+      Grid that = (Grid)x;
+		for (int i = 0; i < values.length; i++) 
+		{
+			for (int j = 0; j < values[i].length; j++)
+			{
+				if (this.values[i][j] != that.values[i][j])
+				{
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }

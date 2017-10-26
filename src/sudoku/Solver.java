@@ -2,7 +2,6 @@ package sudoku;
 
 import java.util.*;
 
-
 public class Solver 
 {
 	private Grid						problem;
@@ -55,10 +54,9 @@ public class Solver
 	//
 	public Evaluation evaluate(Grid grid)
 	{
-
-
+      return Evaluation.ACCEPT;
 	}
-
+  
 	
 	public ArrayList<Grid> getSolutions()
 	{
@@ -72,7 +70,5 @@ public class Solver
 		Solver solver = new Solver(g);
 		System.out.println(“Will solve\n” + g);
 		solver.solve();
-		
-		// Print out your solution, or test if it equals() the solution in TestGridSupplier.
 	}
 }
