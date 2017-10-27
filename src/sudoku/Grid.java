@@ -1,6 +1,7 @@
 package sudoku;
 
 import java.util.*;
+import java.util.Optional;
 
 
 public class Grid 
@@ -97,31 +98,42 @@ public class Grid
 	// .........          .........          .........          .........                  .........
 	// .........          .........          .........          .........                  .........
 	//
-	public ArrayList<Grid> next9Grids()
+
+   private Optional<ArrayList<Integer>> nextEmptyCell(int[][] values ) {
+      int x = 0;
+      int y = 0;
+
+      ArrayList<Integer> rval = new ArrayList<Integer>();
+      
+      for (int i = 0; i < values.length; i++)  {
+			for (int j = 0; j < values[i].length; j++) {
+				if (values[i][j] == 0) {
+               rval.add(i);
+               rval.add(j);
+               return Optional.of(rval);
+            }
+         }     
+      }
+      return Optional.empty();
+   }
+
+   public ArrayList<Grid> next9Grids()
 	{		
-      int xOfNextEmptyCell = 0;
-		int yOfNextEmptyCell = 0;
 
 		// Find x,y of an empty cell.
 
-      for (int i = 0; i < values.length; i++) 
-		{
-			for (int j = 0; j < values[i].length; j++)
-			{
-				if (values[i][j] == 0)
-				{
-					xOfNextEmptyCell = i;
-					yOfNextEmptyCell = j;
-               break;
-				}
-			}
-		}
+      Optional<ArrayList<Integer>> o = nextEmptyCell(values);
+      // check if o.empty() and if not... 
+      int xOfNextEmptyCell = o.get().get(0);
+		int yOfNextEmptyCell = o.get().get(1);
+      
+      System.out.println("x, y: " + xOfNextEmptyCell + ", " + yOfNextEmptyCell);
       
 		// Construct array list to contain 9 new grids.
 		ArrayList<Grid> grids = new ArrayList<Grid>();
 
 		// Create 9 new grids as described in the comments above. Add them to grids.
-      for (int i = 0; i < 9; i++)
+      for (int i = 1; i < 10; i++)
 		{
          // copy this grid to a new grid
          Grid grid = new Grid(this);

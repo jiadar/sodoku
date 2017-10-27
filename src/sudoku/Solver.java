@@ -68,7 +68,7 @@ public class Solver
 	{
 		Grid g = TestGridSupplier.getPuzzle1();		// or any other puzzle
 		Solver solver = new Solver(g);
-		System.out.println(“Will solve\n” + g);
+		System.out.println("Will solve\n" + g);
 		solver.solve();
 	}
 }
